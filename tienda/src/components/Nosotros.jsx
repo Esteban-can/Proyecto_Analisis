@@ -7,7 +7,7 @@ function SobreNosotros() {
       <h2>Sobre Nosotros</h2>
       <p>
     <p>
-  En <strong>ZONA 404 SPORTS</strong> nos apasiona el calzado deportivo. 
+  En <strong>ZONA 404 SHOES</strong> nos apasiona el calzado deportivo. 
   Desde nuestros inicios, hemos buscado ofrecer zapatos de calidad 
   que combinen estilo, comodidad y rendimiento en cada paso.
 </p>

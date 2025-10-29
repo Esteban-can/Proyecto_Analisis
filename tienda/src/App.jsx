@@ -27,7 +27,7 @@ import { Button } from "@mui/material";
 function Home({ addToCart }) {
   return (
     <main className="main-content">
-      <h2 className="titulo-bienvenida">Bienvenido a ZONA 404 SPORTS</h2>
+      <h2 className="titulo-bienvenida">Bienvenido a ZONA 404 SHOES</h2>
       <p className="texto-bienvenida">
         Tu tienda en línea de zapatos deportivos. Explora nuestro catálogo y encuentra el calzado perfecto para ti.
       </p>
@@ -188,7 +188,7 @@ function App() {
       </Routes>
 
       <footer className="footer">
-        <p>&copy; 2025 ZONA 404 SPORTS. Todos los derechos reservados.</p>
+        <p>&copy; 2025 ZONA 404 SHOES. Todos los derechos reservados.</p>
       </footer>
     </div>
   );
