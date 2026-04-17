@@ -1,0 +1,28 @@
+.sobre-nosotros {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.sobre-nosotros h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.sobre-nosotros p {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.sobre-nosotros ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sobre-nosotros li {
+  background-color: #f4f4f4;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
