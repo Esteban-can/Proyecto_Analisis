@@ -30,7 +30,10 @@ function Home({ addToCart }) {
     <main className="main-content">
      <h2 className="titulo-bienvenida">Bienvenido a ZONA 404 SHOES</h2>
       <p className="texto-bienvenida">
-        Tu tienda en línea de zapatos deportivos. Explora nuestro catálogo y encuentra el calzado perfecto para ti.
+        Tu tienda en línea de zapatos en línea.
+      </p>
+      <p className="texto-bienvenida-2">
+     Explora nuestro catálogo y encuentra el calzado perfecto para ti.
       </p>
       <Catalogo addToCart={addToCart} />
     </main>

@@ -78,6 +78,10 @@ html, body, #root {
   font-size: 2rem; /* ≈ 19px */
   color: #333;
 }
+.texto-bienvenida-2 {
+  font-size: 2rem; /* ≈ 19px */
+  color: #333;
+}
 
 .logo-image {
   width: 120px;   /* ancho del logo */

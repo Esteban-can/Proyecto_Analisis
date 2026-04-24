@@ -2,15 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import "./boton.css";
 import "./panel.css";
 import botImg from "../assets/bot-avatar.png";
-import botonImg from "../assets/boton-avatar.png";
+import botonImg from "../assets/avatar-bot.png";
+import messImg from "../assets/mensaje-avatar.png";
 import api from "../api/axios.js";
-
+import {motion} from 'framer-motion' ;
+import ReactMarkdown from "react-markdown";
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);
 
+  
   // Obtener usuario
   const getUserId = () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -31,6 +34,7 @@ export default function ChatWidget() {
       ]);
     } else {
       setMessages(saved);
+      
     }
   }, []);
 
@@ -50,13 +54,16 @@ export default function ChatWidget() {
     if (!userId) {
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "Debes iniciar sesión para usar el chat 🔐" }
+        { sender: "bot", text: "Debes iniciar sesión o crear un usuario para poder usar el chat " }
       ]);
       return;
     }
 
-    const userMsg = { sender: "user", text };
-    setMessages((prev) => [...prev, userMsg]);
+   const userMsg = { sender: "user", text };
+const loadingMsg = { sender: "bot", loading: true };
+
+setMessages((prev) => [...prev, userMsg, loadingMsg]);
+
 
     try {
       const response = await api.post("/Chat/mensaje", {
@@ -64,12 +71,16 @@ export default function ChatWidget() {
         usuarioId: userId
       });
 
-      const botMsg = {
+      const botMessages = response.data.respuestas.map((txt) => ({
         sender: "bot",
-        text: response.data.respuesta
-      };
+        text: txt
+        
+      }));
 
-      setMessages((prev) => [...prev, botMsg]);
+    setMessages((prev) => {
+    const filtered = prev.filter(msg => !msg.loading);
+      return [...filtered, ...botMessages];
+    });
 
     } catch (error) {
       setMessages((prev) => [
@@ -84,11 +95,7 @@ export default function ChatWidget() {
     if (!input.trim()) return;
     sendToBot(input);
     setInput("");
-  };
 
-  // 🔹 Click en opciones
-  const handleOptionClick = (option) => {
-    sendToBot(option);
   };
 
   return (
@@ -101,8 +108,7 @@ export default function ChatWidget() {
       )}
 
       {/* Panel */}
-      <div className={`chat-panel ${open ? "open" : ""}`}>
-
+      <div className={`chat-panel ${open ? "open" : ""}`} >
         {/* Header */}
         <div className="chat-header">
           <div className="chat-header-info">
@@ -110,6 +116,7 @@ export default function ChatWidget() {
             <div>
               <strong>Glitch</strong>
               <p>En línea</p>
+          
             </div>
           </div>
 
@@ -124,11 +131,19 @@ export default function ChatWidget() {
             <div key={i} className={`chat-row ${msg.sender}`}>
 
               {msg.sender === "bot" && i === 0 && (
-                <img src={botImg} className="chat-avatar" />
+                <img src={messImg} className="chat-avatar" />
               )}
 
-              <div className={`chat-bubble ${msg.sender}`}>
-                <p>{msg.text}</p>
+             <div className={`chat-bubble ${msg.sender} ${msg.text?.includes("Precio") ? "product-card" : ""}`}>
+               {msg.loading ? (
+  <div className="typing-indicator">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+) : (
+  <ReactMarkdown>{msg.text}</ReactMarkdown>
+)}
 
                 {msg.options && (
                   <div className="chat-options">
